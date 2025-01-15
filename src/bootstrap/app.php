@@ -69,6 +69,7 @@ $app->singleton(App\Services\HabitacionService::class, function ($app) {
 
 $app->configure('app');
 $app->configure('validaciones');
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
@@ -81,13 +82,16 @@ $app->configure('validaciones');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    \Illuminate\Http\Middleware\HandleCors::class
+]);
 
 // $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
+//     // 'auth' => App\Http\Middleware\Authenticate::class,
+//     'cors' => \Illuminate\Http\Middleware\HandleCors::class
 // ]);
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +107,7 @@ $app->configure('validaciones');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+// $app->register(\Illuminate\Http\Middleware\HandleCors::class);
 
 /*
 |--------------------------------------------------------------------------

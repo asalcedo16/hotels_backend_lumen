@@ -18,4 +18,21 @@ class HotelTipoHabitacionAcomodacion extends Model
 
     public $timestamps = true;
 
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'hotel_id', 'id');
+    }
+
+
+    public function tipoHabitacionesAcomodaciones()
+    {
+        return $this->hasMany(
+            TipoHabitacionAcomodacion::class,
+            'id',
+            'tipo_habitacion_acomodacion_id',
+        )->with('tipoHabitacion', 'acomodacion');
+    }
+
+
+
 }

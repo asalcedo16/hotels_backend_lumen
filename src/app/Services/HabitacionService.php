@@ -4,10 +4,11 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Exceptions\BadRequestException;
 
 use App\Models\HotelTipoHabitacionAcomodacion as Habitacion;
-use App\Models\HotelTipoHabitacion as TipoHabitacion;
+use App\Models\TipoHabitacion;
+use App\Models\TipoHabitacionAcomodacion as HabitacionAcomodacion;
 use App\Models\Hotel;
 
 class HabitacionService
@@ -43,7 +44,9 @@ class HabitacionService
 
         $this->statusCantidadHotel($data['hotel_id'],$data['cantidad']);
 
-        return Habitacion::create($validator->validated());
+        $habitacion = Habitacion::create($validator->validated());
+
+        return $habitacion->load('tipoHabitacionesAcomodaciones');
      }
 
 
@@ -68,14 +71,20 @@ class HabitacionService
      }
 
      // Función para obtener todos los hoteles
-     public function getAllHabitacion($hotel_id)
+     public function getAllHotelHabitacion($hotel_id)
      {
-         return Habitacion::where('hotel_id',$hotel_id)->get();
+         return Habitacion::with('tipoHabitacionesAcomodaciones')->where('hotel_id',$hotel_id)->get();
      }
 
      Public function getTipoHabitacion()
      {
         return TipoHabitacion::all();
+     }
+
+
+     Public function getTipoHabitacionAcomodacion()
+     {
+        return HabitacionAcomodacion::with('tipoHabitacion','acomodacion')->get();
      }
 
      // Función para eliminar un hotel
@@ -125,7 +134,6 @@ class HabitacionService
 
      private function responseException($message)
      {
-        throw new HttpResponseException(
-            response()->json(['error'=>$message], 400));
+        throw new BadRequestException($message);
      }
 }

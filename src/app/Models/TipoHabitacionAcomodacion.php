@@ -13,4 +13,18 @@ class TipoHabitacionAcomodacion extends Model
 
     public $timestamps = true;
 
+    public function tipoHabitacion()
+    {
+        return $this->belongsTo(TipoHabitacion::class, 'tipo_habitacion_id','id');
+    }
+
+
+    public function acomodacion()
+    {
+        return $this->belongsTo(Acomodacion::class, 'acomodacion_id', 'id');
+    }
+
+
+
+
 }

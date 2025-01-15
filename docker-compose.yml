@@ -18,9 +18,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: "${UID}:${GID}"
     env_file: 
-      - ./src/.env  
+      - ./src/.env
     volumes:
       - ./src:/src
     working_dir: /src

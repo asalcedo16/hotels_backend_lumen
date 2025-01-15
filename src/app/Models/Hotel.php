@@ -16,9 +16,17 @@ class Hotel extends Model
         'nit',
         'telefono',
         'email',
-        'cantidad'
+        'cantidad',
+        'ciudad'
     ];
 
     public $timestamps = true;
+
+    public function hotelTipoHabitacionAcomodacion()
+    {
+        return $this->hasMany(HotelTipoHabitacionAcomodacion::class, 'hotel_id', 'id');
+    }
+
+
 
 }

@@ -16,4 +16,6 @@ class Acomodacion extends Model
 
     public $timestamps = true;
 
+
+
 }

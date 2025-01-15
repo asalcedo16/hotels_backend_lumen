@@ -40,6 +40,21 @@ class HabitacionController extends Controller
 
     }
 
+    public function hotelHabitacion($hotel_id)
+    {
+       return $this->habitacionService->getAllHotelHabitacion($hotel_id);
+    }
+
+    public function tipoHabitacion()
+    {
+       return $this->habitacionService->getTipoHabitacion();
+    }
+
+    public function tipoHabitacionAcomodacion()
+    {
+       return $this->habitacionService->getTipoHabitacionAcomodacion();
+    }
+
 
     //
 }

@@ -16,4 +16,6 @@ class TipoHabitacion extends Model
 
     public $timestamps = true;
 
+
+
 }

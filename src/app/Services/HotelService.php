@@ -22,7 +22,8 @@ class HotelService
             'nit' => 'required|string|unique:hoteles,nit',
             'telefono' => 'required|string',
             'email' => 'required|email',
-            'cantidad' => 'required|integer|min:1'
+            'cantidad' => 'required|integer|min:1',
+            'ciudad' => 'required|string',
         ], $messages);
 
         // Si la validación falla, lanzar una excepción
@@ -31,13 +32,17 @@ class HotelService
         }
 
 
-        return Hotel::create($validator->validated());
+        $hotel = Hotel::create($validator->validated());
+        return $hotel->load('hotelTipoHabitacionAcomodacion.tipoHabitacionesAcomodaciones');
     }
 
     // Función para obtener todos los hoteles
     public function getAllHotels()
     {
-        return Hotel::all();
+        return Hotel::with(
+            'hotelTipoHabitacionAcomodacion.tipoHabitacionesAcomodaciones'
+            )
+            ->get();
     }
 
     // Función para eliminar un hotel
@@ -72,7 +77,8 @@ class HotelService
             'nit' => 'string|unique:hoteles,nit,' . $id,
             'telefono' => 'string',
             'email' => 'email',
-            'cantidad' => 'integer|min:1'
+            'cantidad' => 'integer|min:1',
+            'ciudad' => 'string',
         ]);
 
         // Si la validación falla, lanzar una excepción

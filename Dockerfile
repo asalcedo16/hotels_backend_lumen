@@ -7,3 +7,12 @@ RUN apt-get update \
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Create a non-root user with the same UID and GID as the host
+ARG UID=1000
+ARG GID=1000
+
+RUN groupadd -g ${GID} appgroup \
+    && useradd -m -u ${UID} -g appgroup appuser
+
+USER appuser

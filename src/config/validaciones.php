@@ -17,6 +17,8 @@ return [
         'cantidad.integer' => 'La cantidad debe ser un valor entero',
         'cantidad.required' => 'La cantidad es obligatoria',
         'cantidad.min' => 'La cantidad debe ser mayor a cero (0)',
+        'ciudad.required' => 'El nombre de la ciudad es obligatorio.',
+        'ciudad.string' => 'El nombre de la ciudad debe ser una cadena de texto.',
     ],
     'habitacion' => [
         'hotel_id.required' => 'Es necesario selecionar un hotel',
